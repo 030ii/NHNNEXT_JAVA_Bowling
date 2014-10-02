@@ -1,10 +1,18 @@
 package main;
 
 public class Print {
+	
+	/*
+	 * print header of board
+	 */
 	public void basicBoard() {
 		System.out.println("=====================================================================");
 		System.out.println("|     |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |   10  |");	
 	}
+	
+	/*
+	 * print score of board
+	 */
 	public void scoreBoard(Player [] player, int playerNum, int frameNum) {
 		for (int i = 0; i < player.length; i++) {
 			StringBuilder sb = new StringBuilder();
@@ -70,6 +78,9 @@ public class Print {
 		System.out.println("=====================================================================");
 	}
 	
+	/*
+	 * make frame score to string
+	 */
 	public String frameScore(int first, int second)
 	{
 		if ( first == 10 )
@@ -81,6 +92,9 @@ public class Print {
 		return " " + frameScore(first) + " " + frameScore(second) + " ";
 	}
 
+	/*
+	 * make frame each score to char
+	 */
 	public String frameScore(int num) {
 		if (num == 0)
 			return "-";

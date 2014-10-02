@@ -4,6 +4,9 @@ public class Calculator {
 	public int thisIndex = 0;
 	public int sum = 0;
 	
+	/*
+	 * calculate Score 
+	 */
 	public void calcScore(Frame [] frame, int [] accumScore, int frameNum) {
 		while (thisIndex <= frameNum) {
 			// Optimised by jwlee
@@ -24,6 +27,9 @@ public class Calculator {
 		}
 	}
 	
+	/*
+	 * In case "spare", calculate bonus score
+	 */
 	private int spareBonus(Frame [] frame, int thisIndex, int frameNum) {
 		if (thisIndex < 9 && thisIndex + 1 > frameNum)
 			return -1;
@@ -31,6 +37,9 @@ public class Calculator {
 		return frame[thisIndex + 1].first;
 	}
 	
+	/*
+	 * In case "strike", calculate bonus score 
+	 */
 	private int strikeBonus(Frame [] frame, int thisIndex, int frameNum) {
 		if (thisIndex < 9 && thisIndex + 1 > frameNum)
 			return -1;

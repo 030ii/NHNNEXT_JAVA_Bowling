@@ -5,6 +5,12 @@ import java.util.Scanner;
 public class Game {
 	public Player [] player;
 	
+	/*
+	 * 1) determine player number
+	 * 2) input frame score (first point, second point)
+	 * 3) calculate score
+	 * 4) print scoreboard
+	 */
 	public void play() {
 		Scanner scanner = new Scanner(System.in);
 		
@@ -35,6 +41,9 @@ public class Game {
 		scanner.close();
 	}
 
+	/*
+	 * input score
+	 */
 	private void inputScore(Scanner scanner, int playerNum, int frameNum) {
 		Frame frame = player[playerNum].frame[frameNum];
 
@@ -51,7 +60,8 @@ public class Game {
 				frame.second = second;
 			} while (frame.second > 10);
 		}
-			
+
+		// Input three score
 		if (frameNum == 9){
 			if (frame.isSpare()) {
 				System.out.print("third score : ");
@@ -68,17 +78,15 @@ public class Game {
 				player[playerNum].frame[10].second = third;
 			}
 		}
-			
-		
 	}
 
+	/*
+	 * create players
+	 */
 	private void createPlayer(int playerCount) {
 		player = new Player [playerCount];
 		for ( int i = 0; i < playerCount; i++ ) {
 			player[i] = new Player();
 		}
 	}
-	
-	
-	
 }
