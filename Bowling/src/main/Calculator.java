@@ -6,28 +6,20 @@ public class Calculator {
 	
 	public void calcScore(Frame [] frame, int [] accumScore, int frameNum) {
 		while (thisIndex <= frameNum) {
-			if (frame[thisIndex].isStrike()) {
-				int bonus = strikeBonus(frame, thisIndex, frameNum);
-				
-				if (bonus == -1)
-					return;
-				
-				sum += 10 + bonus;
-				accumScore[thisIndex] = sum;
-			}
-			else if (frame[thisIndex].isSpare()) {
-				int bonus = spareBonus(frame, thisIndex, frameNum);
-				
-				if (bonus == -1)
-					return;
-				
-				sum += 10 + bonus;
-				accumScore[thisIndex] = sum;
-			}
-			else if (frame[thisIndex].isOpen()) {
-				sum += addFirstSecond(frame[thisIndex]);
-				accumScore[thisIndex] = sum;
-			}
+			// Optimised by jwlee
+			int basic = addFirstSecond(frame[thisIndex]);
+			int bonus = 0;
+
+			if (frame[thisIndex].isStrike())
+				bonus = strikeBonus(frame, thisIndex, frameNum);
+			if (frame[thisIndex].isSpare())
+				bonus = spareBonus(frame, thisIndex, frameNum);
+
+			if (bonus == -1)
+				return;
+
+			sum += basic + bonus;
+			accumScore[thisIndex] = sum;
 			thisIndex++;
 		}
 	}

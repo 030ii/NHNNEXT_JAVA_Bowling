@@ -17,60 +17,35 @@ public class Print {
 				int second = player[i].frame[j].second;
 				
 				if (j < frameNum || (j == frameNum && i <= playerNum) ) {
-					sb.append(" ");
-					sb.append(frameScore(first));
-					sb.append(" ");
-					if (first != 10) {
-						sb.append(frameScore(second));
-						sb.append(" |");
-					}
-					else 
-						sb.append("  |");
+					sb.append(frameScore(first, second) + "|");
 				}
 				else {
 					sb.append("     |");
 				}
 			}
 			
+			String first = " ";
+			String second = " ";
+			String third = " ";
 			if (frameNum == 9 && i <= playerNum) {
 				if (player[i].frame[9].isOpen()) {
-					int first = player[i].frame[9].first;
-					int second = player[i].frame[9].second;
-					
-					sb.append(" ");
-					sb.append(frameScore(first));
-					sb.append(" ");
-					sb.append(frameScore(second));
-					sb.append("   |");
+					first = frameScore(player[i].frame[9].first);
+					second = frameScore(player[i].frame[9].second);
 				}
 	
 				if (player[i].frame[9].isSpare()) {
-					int first = player[i].frame[9].first;
-					int second = player[i].frame[9].second;
-					int third = player[i].frame[10].first;
-					
-					sb.append(" ");
-					sb.append(frameScore(first));
-					sb.append(" ");
-					sb.append(frameScore(second));
-					sb.append(" ");
-					sb.append(frameScore(third));
-					sb.append(" |");
+					first = frameScore(player[i].frame[9].first);
+					second = frameScore(player[i].frame[9].second);
+					third = frameScore(player[i].frame[10].first);
 				}
 						
 				if (player[i].frame[9].isStrike()) {
-					int first = player[i].frame[9].first;
-					int second = player[i].frame[10].first;
-					int third = player[i].frame[10].second;
-					
-					sb.append(" ");
-					sb.append(frameScore(first));
-					sb.append(" ");
-					sb.append(frameScore(second));
-					sb.append(" ");
-					sb.append(frameScore(third));
-					sb.append(" |");
+					first = frameScore(player[i].frame[9].first);
+					second = frameScore(player[i].frame[10].first);
+					third = frameScore(player[i].frame[10].second);
 				}
+					
+				sb.append(" " + first + " " + second + " " + third + " |");
 			}
 			else 
 				sb.append("       |");
@@ -93,6 +68,17 @@ public class Print {
 			System.out.println();
 		}
 		System.out.println("=====================================================================");
+	}
+	
+	public String frameScore(int first, int second)
+	{
+		if ( first == 10 )
+			return " " + frameScore(first) + "   ";
+		
+		if ( first + second == 10 )
+			return " " + frameScore(first) + " " + "/" + " ";
+
+		return " " + frameScore(first) + " " + frameScore(second) + " ";
 	}
 
 	public String frameScore(int num) {
