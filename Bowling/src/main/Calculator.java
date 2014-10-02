@@ -2,6 +2,7 @@ package main;
 
 public class Calculator {
 	public int thisIndex = 0;
+	public int sum = 0;
 	
 	public void calcScore(Frame [] frame, int [] accumScore, int frameNum) {
 		while (thisIndex <= frameNum) {
@@ -11,7 +12,8 @@ public class Calculator {
 				if (bonus == -1)
 					return;
 				
-				accumScore[thisIndex] = 10 + bonus;
+				sum += 10 + bonus;
+				accumScore[thisIndex] = sum;
 			}
 			else if (frame[thisIndex].isSpare()) {
 				int bonus = spareBonus(frame, thisIndex, frameNum);
@@ -19,10 +21,12 @@ public class Calculator {
 				if (bonus == -1)
 					return;
 				
-				accumScore[thisIndex] = 10 + bonus;
+				sum += 10 + bonus;
+				accumScore[thisIndex] = sum;
 			}
 			else if (frame[thisIndex].isOpen()) {
-				accumScore[thisIndex] = addFirstSecond(frame[thisIndex]);
+				sum += addFirstSecond(frame[thisIndex]);
+				accumScore[thisIndex] = sum;
 			}
 			thisIndex++;
 		}
@@ -41,6 +45,9 @@ public class Calculator {
 		
 		if (!frame[thisIndex + 1].isStrike())
 			return addFirstSecond(frame[thisIndex + 1]);
+		
+		if (thisIndex == 9)
+			return 10 + frame[thisIndex + 1].second;
 		
 		if (thisIndex < 8 && thisIndex + 2 > frameNum)
 			return -1;
